@@ -19,26 +19,35 @@ direction = 0
 
 controller = false
 
-window.addEventListener("gamepadconnected",(listener) => {
+window.addEventListener("gamepadconnected", (listener) => {
     controllerStatusText.textContent = "Detected";
     requestAnimationFrame(pollGamepad)
 })
 
-window.addEventListener("gamepaddisconnected",(listener) => {
+window.addEventListener("gamepaddisconnected", (listener) => {
     controllerStatusText.textContent = "Detected"
     console.log("Controller lost")
 })
 
+lastPress = NaN
+lastAxes = [NaN, NaN]
+
 function pollGamepad() {
     gp = navigator.getGamepads()[0]
-
-
     gp.buttons.forEach((button, index) => {
-        if (button.pressed) {
-            buttonIndex = gp.buttons[index]
-            console.log(`Button ${index} was pressed`)
+        if (button.pressed && (lastPress != index)) {
+            lastPress = Number(index);
+            console.log(`Button ${index} was pressed, lastPress = ${lastPress}`);
         }
     });
+    currentAxes = [gp.axes[0], gp.axes[1]]
+
+    if ((currentAxes[0] == lastAxes[0]) && (currentAxes[1] == lastAxes[1])) {
+        
+    } else {
+        console.log(`unique: ${currentAxes}, ${lastAxes}`)
+        lastAxes = currentAxes 
+    }
 
     requestAnimationFrame(pollGamepad)
 }
@@ -61,7 +70,7 @@ function startGame() {
 
 
 function randomizeDirection() {
-    direction = Math.floor(Math.random()*3.99);
+    direction = Math.floor(Math.random() * 3.99);
     console.log(direction)
 }
 
