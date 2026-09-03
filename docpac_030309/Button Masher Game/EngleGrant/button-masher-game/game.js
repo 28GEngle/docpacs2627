@@ -5,11 +5,13 @@ var msPerDirectionChange = 2000 // Miliseconds per direction change.
 // --------
 window.addEventListener("gamepadconnected", (listener) => {
     controllerStatusText.textContent = "Detected";
+    controller = true
     requestAnimationFrame(pollGamepad)
 })
 
 window.addEventListener("gamepaddisconnected", (listener) => {
     controllerStatusText.textContent = "Detected"
+    controller = false
     console.log("Controller lost")
 })
 // --------
@@ -23,13 +25,6 @@ var directions = {
     "down": 1,
     "left": 2,
     "right": 3
-}
-
-var reversedDirections = {
-    0: "UP",
-    1: "DOWN",
-    2: "LEFT",
-    3: "RIGHT" 
 }
 
 var controllerStatusText = document.getElementById("controller");
@@ -61,7 +56,7 @@ frame = 0
 function pollGamepad() {
     frame++
 
-    if (frame >= framerate) {
+    if (frame >= framerate && controller) {
         frame = 0
         gp = navigator.getGamepads()[0]
         gp.buttons.forEach((button, index) => {
@@ -91,6 +86,7 @@ function pollGamepad() {
 
             } else {
                 console.log(`new joystick pos: ${currentAxes}`)
+                controllerDirectionText.textContent = numberToDirectionString(gamepadDirection(currentAxes))
                 lastAxes = currentAxes
             }
         });
@@ -173,6 +169,8 @@ function numberToDirectionString(input) {
         return "RIGHT"
     } else if (input == 3) {
         return "LEFT"
+    } else {
+        return "CENTER"
     }
 }
 
