@@ -1,0 +1,18 @@
+CORE CHECKS -----
+Timer begins at 20 seconds: y
+Decreases once per ~second: y
+Stops at zero: y
+Never becomes a negative: y
+Direction changes about every 2 seconds: y
+Only UP, DOWN, LEFT, RIGHT appear: y
+Direction changing stops when the game ends: y
+Restarting restores timer and game state: y
+
+SYSTEM CHECKS -----
+Left scoring direction awards a point for pressing A and angled to the left: y
+Right scoring direction awards a point for pressing A and angled to the right: y
+Down scoring direction awards a point for pressing A and angled up: y
+Up scoring direction awards a point for pressing A and angled down: y
+All scoring directions do not award points for facing any direction but the scoring direction: y
+Multiple points can be earned by fulfilling the same conditions and pressing A multiple times: y
+Strong diagonals DO NOT count: y

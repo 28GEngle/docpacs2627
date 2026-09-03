@@ -1,7 +1,7 @@
 // Settings
-var initialTime = 25 // Duration of each game.
+var initialTime = 20 // Duration of each game.
 var framerate = 2 // Increase if you are having performance issues.
-var msPerDirectionChange = 3000
+var msPerDirectionChange = 2000 // Miliseconds per direction change.
 // --------
 window.addEventListener("gamepadconnected", (listener) => {
     controllerStatusText.textContent = "Detected";
@@ -14,6 +14,7 @@ window.addEventListener("gamepaddisconnected", (listener) => {
 })
 // --------
 var score = 0
+var highScore = 0
 var scoringDirection = 0
 var gameTime = initialTime
 
@@ -24,11 +25,21 @@ var directions = {
     "right": 3
 }
 
+var reversedDirections = {
+    0: "UP",
+    1: "DOWN",
+    2: "LEFT",
+    3: "RIGHT" 
+}
+
 var controllerStatusText = document.getElementById("controller");
 var scoreText = document.getElementById("score");
 var timeText = document.getElementById("time");
-var directionText = document.getElementById("directionText")
+var directionText = document.getElementById("directionText");
+var controllerDirectionText = document.getElementById("controllerDirectionText");
 var startButton = document.getElementById("start");
+var statusLabel = document.getElementById("statusLabel");
+var highScoreText = document.getElementById("highScoreText");
 
 var controller = false
 var gameRunning = false
@@ -57,7 +68,7 @@ function pollGamepad() {
             currentAxes = [gp.axes[0], gp.axes[1]]
 
             if (button.pressed && !buttonStates[index]) {
-                console.log(`${index} pressed`)
+                console.log(`button ${index} pressed`)
 
                 // If the button has a function that can be ran with arguments, run it with the arguments.
                 if (buttonActivations[0] && index == 0) {
@@ -69,7 +80,7 @@ function pollGamepad() {
 
                 buttonStates[index] = true
             } else if (!button.pressed && buttonStates[index]) {
-                console.log(`${index} released`)
+                console.log(`button ${index} released`)
                 buttonStates[index] = false
             }
 
@@ -79,7 +90,7 @@ function pollGamepad() {
             ) {
 
             } else {
-                console.log(`unique: ${currentAxes}`)
+                console.log(`new joystick pos: ${currentAxes}`)
                 lastAxes = currentAxes
             }
         });
@@ -92,7 +103,12 @@ function endGame() {
     clearInterval(timeInterval);
     clearInterval(directionInterval);
 
+    if (highScore < score) {
+        highScore = score;
+        highScoreText.textContent = highScore;
+    }
     startButton.disabled = false;
+    statusLabel.hidden = false;
 
     gameRunning = false;
 }
@@ -107,6 +123,7 @@ function deadzone(input, min = -0.3, max = 0.3) {
 
 function startGame() {
     if (!gameRunning) {
+        statusLabel.hidden = true
         gameTime = initialTime
         score = 0
 
@@ -129,7 +146,7 @@ function gamepadDirection(axes) {
     } else if (deadzone(axes[1]) < 0) {
         currentDirection = directions.down
     }
-    
+
     if (deadzone(axes[0]) > 0) {
         currentDirection = directions.left
     } else if (deadzone(axes[0]) < 0) {
@@ -143,6 +160,7 @@ function attemptAward(axes) {
     if (scoringDirection == gamepadDirection(axes) && gameRunning) {
         score++
         scoreText.textContent = score
+        console.log(`points awarded for matching scoring direction: ${gamepadDirection(axes)}`)
     }
 }
 
