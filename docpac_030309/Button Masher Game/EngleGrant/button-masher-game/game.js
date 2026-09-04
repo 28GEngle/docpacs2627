@@ -58,7 +58,20 @@ function pollGamepad() {
 
     if (frame >= framerate && controller) {
         frame = 0
+        
         gp = navigator.getGamepads()[0]
+        if (!gp) { 
+            // If gamepad isn't found on the expected port (null) find other controllers on different ports
+            // Sometimes controllers end up being sorted into ID 1 instead of ID 0 and this catches that
+            for (let gamepadID = 1; gamepadID < 4; gamepadID++) {
+                    if (gp) {
+                        break;
+                    } else {
+                        gp = navigator.getGamepads()[gamepadID]
+                    }
+            }
+        }
+
         gp.buttons.forEach((button, index) => {
             currentAxes = [gp.axes[0], gp.axes[1]]
 

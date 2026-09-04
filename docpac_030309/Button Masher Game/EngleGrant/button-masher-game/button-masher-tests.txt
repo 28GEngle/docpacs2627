@@ -123,7 +123,7 @@ No controller connected: ✅
 Controller connects after page loads: ✅
 Controller disconnects during the game: ✅
 Controller reconnects: ✅
-Multiple controllers connected: ❌
+Multiple controllers connected: ✅
 Holding A during direction change: ✅
 A pressed at the exact moment as timer reaches 0: ❓
 Browser tab loses focus: ✅
