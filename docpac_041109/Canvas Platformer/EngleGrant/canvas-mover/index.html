@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML/JS Canvas-Based Mover</title>
+    <script defer src="bonus.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Canvas Mover</h1>
+    <p>WASD or arrow keys to move</p>
+
+    <canvas id="gameCanvas" width="800" height="600"></canvas>
+    <br>
+    <button style="margin-left: 65px;" onclick="up()">UP</button>
+    <br>
+    <button onclick="left()">LEFT</button>
+    <button onclick="down()">DOWN</button>
+    <button onclick="right()">RIGHT</button>
+    <br>
+    <button style="margin-left: 55px;" onclick="drawLoop()">START</button>
+</body>
+</html>
