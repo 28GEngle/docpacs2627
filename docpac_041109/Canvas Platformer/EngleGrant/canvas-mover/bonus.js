@@ -5,9 +5,10 @@ var player = {
     xPos: 0,
     yPos: 0,
 
-    xVelocity: 0,
     yVelocity: 0,
     gravity: .3,
+    jumpPower: 10,
+
     grounded: false,
 
     width: 50,
@@ -23,6 +24,11 @@ keysPressed = {
     "a": false,
     "s": false,
     "d": false,
+
+    "arrowup": false,
+    "arrowleft": false,
+    "arrowdown": false,
+    "arrowright": false
 }
 
 document.addEventListener("DOMContentLoaded", function() {
@@ -57,22 +63,20 @@ function drawLoop() {
 }
 
 function updatePlayer() {
-    if (keysPressed.w) {
+    if (keysPressed.w || keysPressed.arrowup) {
         movePlayer(directions.UP)
     }
-    if (keysPressed.a) {
+    if (keysPressed.a || keysPressed.arrowleft) {
         movePlayer(directions.LEFT)
     }
-    if (keysPressed.s) {
+    if (keysPressed.s || keysPressed.arrowdown) {
         movePlayer(directions.DOWN)
     }
-    if (keysPressed.d) {
+    if (keysPressed.d || keysPressed.arrowright) {
         movePlayer(directions.RIGHT)
     }
 
     player.yVelocity += player.gravity
-
-    console.log(player.yVelocity)
 
     if (!(player.yPos+player.height > canvas.height)){ // Ground Check
         player.yPos += player.yVelocity
@@ -81,6 +85,13 @@ function updatePlayer() {
         player.yPos = canvas.height-player.height
         player.yVelocity = 0
         player.grounded = true
+    }
+    
+    if (!(player.yPos+player.height < 0)){ // Ceiling Check
+        player.yPos += player.yVelocity
+    } else {
+        player.yPos = 0-player.height
+        player.yVelocity = 0
     }
 }
 
@@ -103,10 +114,7 @@ const directions = {
 
 function movePlayer(direction) {
     if (direction == 1 && !(player.yPos < 0) && player.grounded) { // UP
-        player.yVelocity = -4
-    }
-    if (direction == 2) { // DOWN
-
+        player.yVelocity = -player.jumpPower
     }
     
     if (direction == 3 && !(player.xPos < 0)) { // LEFT
@@ -115,4 +123,18 @@ function movePlayer(direction) {
     if (direction == 4 && !(player.xPos+player.width > canvas.width)) { // RIGHT
         player.xPos += player.speed
     }
+}
+
+function updateJumpPower() {
+    jumpPowerInput = document.getElementById("jumpPowerInput")
+    player.jumpPower = Number(jumpPowerInput.value)
+
+    console.log("Updated JumpPower to",player.jumpPower)
+}
+
+function updateSpeed() {
+    speedInput = document.getElementById("speedInput")
+    player.speed = Number(speedInput.value)
+
+    console.log("Updated Speed to",player.speed)
 }

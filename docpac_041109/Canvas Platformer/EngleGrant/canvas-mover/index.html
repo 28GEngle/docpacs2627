@@ -13,12 +13,13 @@
 
     <canvas id="gameCanvas" width="800" height="600"></canvas>
     <br>
-    <button style="margin-left: 65px;" onclick="up()">UP</button>
+    <button id="tickIncreaseButton" onclick="drawLoop()">INCREASE TICKRATE</button>
+    <label style="color: white;" for="tickIncreaseButton">Every press runs drawLoop() seperately, prompting another requestAnimationFrame() to run twice, thrice, etc as fast.</label>
     <br>
-    <button onclick="left()">LEFT</button>
-    <button onclick="down()">DOWN</button>
-    <button onclick="right()">RIGHT</button>
+    <button id="updateJumpPower" onclick="updateJumpPower()">UPDATE JUMPPOWER</button> <input  style="width: 30px;" type="number" name="jumpPowerInput" id="jumpPowerInput" value="10">
+    <label style="color: white;" for="updateJumpPower">Changes the upward acceleration value when the user jumps. Meant for testing the ceilings collision.</label>
     <br>
-    <button style="margin-left: 55px;" onclick="drawLoop()">START</button>
+    <button id="updateSpeed" onclick="updateSpeed()">UPDATE SPEED</button> <input  style="width: 30px;" type="number" name="speedInput" id="speedInput" value="3">
+    <label style="color: white;" for="updateSpeed">Changes the players "walking" speed.</label>
 </body>
 </html>
