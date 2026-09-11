@@ -2,12 +2,12 @@ var canvas = document.getElementById("gameCanvas");
 var context = canvas.getContext("2d");
 
 var player = {
-    xPos: 0,
-    yPos: 0,
+    xPos: canvas.width/2,
+    yPos: canvas.height/2,
 
     yVelocity: 0,
     gravity: .3,
-    jumpPower: 10,
+    jumpPower: 20,
 
     grounded: false,
 
@@ -18,6 +18,9 @@ var player = {
 
     speed: 3
 }
+
+player.xPos -= player.width/2
+player.yPos -= player.height/2
 
 keysPressed = {
     "w": false,
@@ -78,7 +81,7 @@ function updatePlayer() {
 
     player.yVelocity += player.gravity
 
-    if (!(player.yPos+player.height > canvas.height)){ // Ground Check
+    if (!(player.yPos+player.height > canvas.height)){ // Ground Check & Gravity
         player.yPos += player.yVelocity
         player.grounded = false
     } else {
@@ -87,10 +90,10 @@ function updatePlayer() {
         player.grounded = true
     }
     
-    if (!(player.yPos+player.height < 0)){ // Ceiling Check
+    if (!(player.yPos-player.height < -player.height)){ // Ceiling Check & Gravity
         player.yPos += player.yVelocity
     } else {
-        player.yPos = 0-player.height
+        player.yPos = 0
         player.yVelocity = 0
     }
 }
