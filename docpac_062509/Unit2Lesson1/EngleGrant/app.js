@@ -16,7 +16,7 @@ console.log("Local URL:",LocalURL)
 
 app.get("/", (request, response) => {})
 
-app.listen(PORT,"localhost")
+app.listen(PORT,LocalURL)
 
 /*
 const FORM = fs.readFileSync("pages/form.html");
