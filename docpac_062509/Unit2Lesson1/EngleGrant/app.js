@@ -4,13 +4,17 @@ const fs = require("fs");
 const express = require("express");
 const app = express();
 
-const PORT = process.env.PORT;
-
 app.use(express.static("public"))
 
-app.get("/", (request, response) => {
-    
-})
+const PORT = process.env.PORT;
+const APP = process.env.APP_NAME;
+const LocalURL = "localhost"
+
+console.log("PORT:",PORT)
+console.log("App Name:", APP)
+console.log("Local URL:",LocalURL)
+
+app.get("/", (request, response) => {})
 
 app.listen(PORT,"localhost")
 

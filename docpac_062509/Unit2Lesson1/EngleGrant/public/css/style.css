@@ -9,3 +9,8 @@ h1 {
 p {
     color: white;
 }
+
+input {
+    background-color: purple;
+    color: white;
+}
