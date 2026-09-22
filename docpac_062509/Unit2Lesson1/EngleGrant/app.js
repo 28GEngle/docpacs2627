@@ -1,9 +1,20 @@
 const dotenv = require("dotenv").config();
 const http = require("http");
 const fs = require("fs");
+const express = require("express");
+const app = express();
 
 const PORT = process.env.PORT;
 
+app.use(express.static("public"))
+
+app.get("/", (request, response) => {
+    
+})
+
+app.listen(PORT,"localhost")
+
+/*
 const FORM = fs.readFileSync("pages/form.html");
 
 const server = http.createServer(function (request, response) {
@@ -55,3 +66,4 @@ function processData(searchParams,response) {
         response.end("Recieved an invalid input.");
     }
 }
+*/
