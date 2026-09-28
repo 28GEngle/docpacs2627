@@ -1,7 +1,7 @@
-const http = require("http");
+const { error } = require("console");
 const express = require("express");
-const fs = require("fs");
-const env = require("dotenv").config()
+const path = require("path");
+const env = require("dotenv").config();
 
 const app = express();
 
@@ -11,16 +11,16 @@ app.use(express.urlencoded({ extended: true })); // Processes url encoded.
 
 const PORT = process.env.PORT;
 
+const options = {
+    root: path.join(__dirname)
+}
+
 app.get("/",(req, res) => { 
-    fs.readFile("public/index.html",(err,data) => {
-        res.end(data);
-    })
+    res.sendFile("public/index.html", options, (err) => {console.log(err)})
 });
 
 app.get("/form",(req, res) => {
-    fs.readFile("public/form.html",(err,data) => {
-        res.end(data);
-    })
+    res.sendFile("public/form.html", options, (err) => {console.log(err)})
 });
 
 app.get("/query",(req,res) => { 
