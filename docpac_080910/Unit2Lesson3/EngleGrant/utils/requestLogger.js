@@ -3,7 +3,7 @@ function requestLogger(req, res, next) {
     method = req.method
     url = req.url
     
-    console.log(time,method,url)
+    console.log(time,method,url,"| Status:",res.statusCode)
 
     next();
 }
