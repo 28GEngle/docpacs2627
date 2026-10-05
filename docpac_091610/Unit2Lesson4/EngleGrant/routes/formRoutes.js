@@ -3,12 +3,16 @@ const path = require("path");
 
 const router = express.Router()
 
+console.log("route 1 hit")
+
 const options = {
     root: path.join(__dirname)
 }
 
 router.get("/form",(req, res) => {
-    res.sendFile(("../../public/form.html"), options, (err) => {})
+    res.sendFile(path.join(__dirname, '../public/form.html'), (err) => {
+        console.log(err)
+    })
 });
 
 router.post("/form",(req,res) => { 

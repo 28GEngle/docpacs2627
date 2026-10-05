@@ -2,6 +2,8 @@ const express = require("express");
 
 const router = express.Router()
 
+console.log("route 3 hit")
+
 router.get("/urlparams",(req,res) => {
     res.end("Add a parameter to the URL to return it.");
 });
