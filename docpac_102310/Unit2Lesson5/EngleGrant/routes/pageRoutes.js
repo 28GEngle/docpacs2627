@@ -10,7 +10,8 @@ const options = {
 }
 
 router.get("/",(req, res) => {
-    res.sendFile("public/index.html", options, (err) => {})
+    res.render('index', {})
+    // res.sendFile("public/index.html", options, (err) => {})
 });
     
 router.post("/",(req, res) => {

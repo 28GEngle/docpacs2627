@@ -10,9 +10,10 @@ const options = {
 }
 
 router.get("/form",(req, res) => {
-    res.sendFile(path.join(__dirname, '../public/form.html'), (err) => {
-        console.log(err)
-    })
+    res.render('form', {})
+    // res.sendFile(path.join(__dirname, '../public/form.html'), (err) => {
+    //     console.log(err)
+    // })
 });
 
 router.post("/form",(req,res) => { 
