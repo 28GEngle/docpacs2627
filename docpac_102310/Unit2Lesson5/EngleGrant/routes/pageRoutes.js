@@ -10,7 +10,7 @@ const options = {
 }
 
 router.get("/",(req, res) => {
-    res.render('index', {})
+    res.render('index', {pageTitle: "Links"})
     // res.sendFile("public/index.html", options, (err) => {})
 });
     

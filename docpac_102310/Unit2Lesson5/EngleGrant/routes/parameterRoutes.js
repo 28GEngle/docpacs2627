@@ -5,7 +5,7 @@ const router = express.Router()
 console.log("route 3 hit")
 
 router.get("/urlparams",(req,res) => {
-    res.end("Add a parameter to the URL to return it.");
+    res.render('error',{pageTitle: "Error", error: "Add a parameter to the URL to return it."});
 });
 
 router.get("/urlparams/:param",(req,res) => {

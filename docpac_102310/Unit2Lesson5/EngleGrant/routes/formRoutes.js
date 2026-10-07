@@ -10,7 +10,7 @@ const options = {
 }
 
 router.get("/form",(req, res) => {
-    res.render('form', {})
+    res.render('form', {pageTitle: "Form"})
     // res.sendFile(path.join(__dirname, '../public/form.html'), (err) => {
     //     console.log(err)
     // })
@@ -27,11 +27,14 @@ router.post("/form",(req,res) => {
         !validate(password,0,5)
     ) {
         res.status(400)
-        res.end("Input invalid. Ensure all fields have been filled in correctly before submitting.");
+        res.render('error',{pageTitle: "Error", error: "Input invalid. Ensure all fields have been filled in correctly before submitting."})
         return;
     };
 
-    res.send(data);
+    res.render('submittedForm', {
+        username,
+        password
+    })
 });
 
 router.get("/query",(req,res) => { 
@@ -41,7 +44,7 @@ router.get("/query",(req,res) => {
 
     if (!message) {
         res.status(400)
-        res.end("Input invalid. Ensure you have typed a message in before submitting.");
+        res.render('error', {pageTitle: "Error", error: "Input invalid. Ensure you have typed a message in before submitting."});
         return;
     };
 

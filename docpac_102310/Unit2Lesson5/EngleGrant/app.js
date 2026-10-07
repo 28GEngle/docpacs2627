@@ -23,7 +23,7 @@ app.use(parameterRoutes)
 
 app.use("",(req,res) => {
     res.status(404)
-    res.end("No resource found.")
+    res.render('error',{pageTitle: "Error", error: "No resource found."})
 });
 
 app.listen(PORT,"localhost", () => {
