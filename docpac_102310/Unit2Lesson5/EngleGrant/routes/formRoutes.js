@@ -32,8 +32,8 @@ router.post("/form",(req,res) => {
     };
 
     res.render('submittedForm', {
-        username,
-        password
+        pageTitle: "Form Submitted",
+        formData: [["Username",username],["Password",password]]
     })
 });
 
