@@ -23,7 +23,7 @@ router.post("/form",(req,res) => {
 
     if (
         !validate(username) ||
-        !validate(password,0,5)
+        !validate(password,0,16)
     ) {
         res.status(400)
         res.end("Input invalid. Ensure all fields have been filled in correctly before submitting.");
