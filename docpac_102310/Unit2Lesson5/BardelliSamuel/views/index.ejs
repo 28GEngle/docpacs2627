@@ -1,0 +1,12 @@
+<%- include('partials/header') %>
+<h1> <%= title %> </h1>
+    <h2><%= desc %></h2>
+    <h3>App name: <%= appname %></h3>
+    <a href="/form">The form page</a>
+
+    
+    <%if (subtitle){ %>
+        <h1><%= subtitle %></h1>
+    <% } %>
+    <button onclick="load()" type="button">Load video</button>
+    <%- include('partials/footer') %>
