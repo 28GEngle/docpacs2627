@@ -1,17 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HTML Form</title>
-</head>
-
-<body>
+<%- include('partials/header') %>
 
 
 
-    <form id=form1 action="/form" method="post">
+    <form id=form1 action="/formResponse" method="post">
         <p>Please enter information below</p>
         <label for="name">Name:</label>
         <input type="text" id="name" name="name" required>
@@ -70,6 +61,5 @@
         <button type="submit">Submit</button>
         <button type="reset">Reset Form</button>
     </form>
-</body>
 
-</html>
+    <%- include('partials/footer') %>
