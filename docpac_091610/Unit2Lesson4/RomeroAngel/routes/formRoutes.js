@@ -20,4 +20,8 @@ router.post('/form', (req, res) => {
     }
 });
 
+router.post('/', (req, res) => {
+
+});
+
 module.exports = router;

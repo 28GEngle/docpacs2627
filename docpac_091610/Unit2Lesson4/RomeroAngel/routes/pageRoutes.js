@@ -2,11 +2,8 @@ const express = require('express');
 const router = express.Router();
 
 router.get('/', (req, res) => {
-    if (!req.query.message || req.query.message.trim() === "") {
-        res.status(400).send('Please provide a message');
-    } else {
-        res.send(`Your message is: ${req.query.message.trim()}`);
-    }
+    res.send(`<h1>Go to the form and fill it out</h1><p>The form is where you put you interest at and answer questions</p><a href="/form.html">Fill out the form</a>`);
+
 });
 
 router.post('/', (req, res) => {
