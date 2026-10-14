@@ -1,8 +1,16 @@
 const express = require('express');
-const app = express();
 const router = express.Router();
-app.use(pageRouter);
 
-router.get("/", (req, res) => {
-    res.send("");
+router.get('/', (req, res) => {
+    if (!req.query.message || req.query.message.trim() === "") {
+        res.status(400).send('Please provide a message');
+    } else {
+        res.send(`Your message is: ${req.query.message.trim()}`);
+    }
 });
+
+router.post('/', (req, res) => {
+
+});
+
+module.exports = router;
