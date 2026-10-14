@@ -2,9 +2,13 @@ require('dotenv').config()
 const PORT = Number(process.env.PORT);
 const express = require('express')
 const {logger} = require('./utils/requestLogger.js')
+
+//contain controller logic
 const {pageRoute} = require("./routes/pageRoutes.js")
 const {formRoute} = require("./routes/formRoutes.js")
 const {parameterRoute} = require("./routes/parameterRoutes.js")
+
+
 const app = express();
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
