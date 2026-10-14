@@ -3,8 +3,6 @@ const path = require("path");
 
 const router = express.Router()
 
-console.log("route 1 hit")
-
 const options = {
     root: path.join(__dirname)
 }
