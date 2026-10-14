@@ -12,7 +12,12 @@ pageRouter.get('/', (req, res) => {
     res.render('index', {
         title: 'Server home page',
         appName: 'the app',
-        description: "an ejs app / web server"
+        description: "an ejs app / web server",
+        subtitle: "Subtitle!",
+        links: [
+            {"href" : "/form", "text" : "form"},
+            {"href" : "/query?message=testmessage", "text" : "test query"}
+        ]
     })
 
 })

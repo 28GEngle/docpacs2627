@@ -30,6 +30,12 @@ app.use(requestLogger)
 app.use(pageRouter)
 app.use(testRouter)
 
+app.get('*path', (req, res) => {
+    res.render('error', {
+        message: "404 page not found!"
+    })
+})
+
 
 app.use(express.static('public'))
 
