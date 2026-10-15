@@ -2,6 +2,7 @@ const express = require("express");
 const path = require("path");
 
 const router = express.Router()
+const entryModel = require("../models/entryModel.js")
 
 const options = {
     root: path.join(__dirname)

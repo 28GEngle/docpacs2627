@@ -2,21 +2,25 @@ const express = require("express");
 const env = require("dotenv").config();
 
 const requestLogger = require("./utils/requestLogger.js");
+
+const databaseRetrieve = require("./routes/databaseRetrieve.js")
 const formRoutes = require("./routes/formRoutes.js");
 const pageRoutes = require("./routes/pageRoutes.js");
 const parameterRoutes = require("./routes/parameterRoutes.js");
+const database = require("./models/database.js");
 
 const app = express();
 
 const PORT = process.env.PORT;
 
-app.set('view engine', "ejs")
+app.set('view engine', "ejs");
 
-app.use(express.static("public"))
+app.use(express.static("public"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use(requestLogger)
+app.use(databaseRetrieve)
 app.use(formRoutes)
 app.use(pageRoutes)
 app.use(parameterRoutes)
