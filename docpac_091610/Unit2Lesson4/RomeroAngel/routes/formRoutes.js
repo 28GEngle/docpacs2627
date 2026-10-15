@@ -1,8 +1,9 @@
 const express = require('express');
 const router = express.Router();
+const path = require('path');
 
 router.get('/form', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'form.html'));
+    res.sendFile(path.join(__dirname, '..', 'public', 'form.html'));
 });
 
 router.post('/form', (req, res) => {
@@ -18,10 +19,6 @@ router.post('/form', (req, res) => {
         console.log(req.body);
         res.send(`<h1>Thank you, ${req.body.userName}!</h1><p>We will now process and do our stuff to get this filled or something, bye bye!</p>`);
     }
-});
-
-router.post('/', (req, res) => {
-
 });
 
 module.exports = router;
