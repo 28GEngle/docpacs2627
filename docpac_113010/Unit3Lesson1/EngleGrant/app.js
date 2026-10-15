@@ -7,7 +7,6 @@ const databaseRetrieve = require("./routes/databaseRetrieve.js")
 const formRoutes = require("./routes/formRoutes.js");
 const pageRoutes = require("./routes/pageRoutes.js");
 const parameterRoutes = require("./routes/parameterRoutes.js");
-const database = require("./models/database.js");
 
 const app = express();
 
@@ -24,6 +23,8 @@ app.use(databaseRetrieve)
 app.use(formRoutes)
 app.use(pageRoutes)
 app.use(parameterRoutes)
+
+
 
 app.use("",(req,res) => {
     res.status(404)

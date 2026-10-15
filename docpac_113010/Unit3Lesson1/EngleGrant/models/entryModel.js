@@ -1,14 +1,17 @@
 database = require("./database");
 
-function create_entry(user,password) {
+function create_entry(user, password) {
     console.log(user)
     console.log(password)
-    database.prepare(`INSERT INTO entries (user, password) VALUES (?, ?)`).run(user,password);
+    database
+        .prepare(`INSERT INTO entries (user, password) VALUES (?, ?)`)
+        .run(user, password);
 }
 
 function get_entries() {
-    statement = database.prepare(`SELECT id, user, password FROM entries`)
-    console.log(statement.all());
+    return database
+        .prepare(`SELECT id, user, password FROM entries`)
+        .all();
 }
 
-module.exports = create_entry, get_entries;
+module.exports = { create_entry, get_entries };
