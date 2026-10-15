@@ -1,8 +1,11 @@
 const express = require('express');
 const requestLogger = require('./utils/requestLogger.js');
+//Hi! So from here to...
 const formRouter = require('./routes/formRoutes');
 const parameterRouter = require('./routes/parametersRoutes');
 const pageRouter = require('./routes/pageRoutes');
+//... here we can see that these other js files can be seen as our controllers in terms of MVC as they handle the GET and POST 
+// and are what we use to handle submitted forms and the if else these forms need in order to send valid responses
 const path = require('path');
 const { get } = require('http');
 const app = express();
@@ -18,7 +21,7 @@ app.use(express.static('public'));
 app.use(formRouter);
 app.use(parameterRouter);
 app.use(pageRouter);
- 
+
 app.use((req, res) => {
     res.status(404).send('404 Page not found');
 });
