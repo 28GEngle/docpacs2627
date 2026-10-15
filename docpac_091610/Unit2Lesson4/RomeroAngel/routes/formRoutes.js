@@ -17,7 +17,7 @@ router.post('/form', (req, res) => {
     else {
         console.log('Route was hit!');
         console.log(req.body);
-        res.send(`<h1>Thank you, ${req.body.userName}!</h1><p>We will now process and do our stuff to get this filled or something, bye bye!</p>`);
+        res.send(`<h1>Thank you, ${req.body.userName}!</h1><p>We will now process and do our stuff to get this filled or something, so sit back, relax. Grab some snacks, and well jump right to it! bye bye!</p>`);
     }
 });
 

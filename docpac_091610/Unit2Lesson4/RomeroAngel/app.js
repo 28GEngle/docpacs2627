@@ -18,10 +18,7 @@ app.use(express.static('public'));
 app.use(formRouter);
 app.use(parameterRouter);
 app.use(pageRouter);
-
-//req.query: This is a string that has data after "?", this also nice and visible in the URL while being great for filtering and search terms.
-//req.params: Used for dynamic routing, matching values and can access a captured data using req.params.id
-
+ 
 app.use((req, res) => {
     res.status(404).send('404 Page not found');
 });
