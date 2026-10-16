@@ -30,7 +30,7 @@ parama.get('/query', (req, res) => {
 parama.get('/urlparams/:paramname', (req, res) => {
     const param = req.params.paramname;
     if (!param || param.trim() === '') {
-        res.status(400).sendFile(path.join(__dirname, '../public/html/paramsError.html'));
+        res.status(400).sendFile(path.join(__dirname, '../public/badReqError'));
     } else {
         res.send(`
             
