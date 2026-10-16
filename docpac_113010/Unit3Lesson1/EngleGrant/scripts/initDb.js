@@ -3,8 +3,7 @@ const database = require("../models/database");
 database.exec(`
     CREATE TABLE IF NOT EXISTS entries (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
-        user TEXT NOT NULL,
-        password TEXT NOT NULL,
+        value TEXT NOT NULL,
         creation_date DATETIME 
     );
 `)

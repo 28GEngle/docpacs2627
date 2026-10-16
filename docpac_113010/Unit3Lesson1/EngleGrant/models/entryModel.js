@@ -1,22 +1,19 @@
-database = require("./databaseRetrieve");
+const database = require("./database");
 
-function create_entry(user, password) {
-    console.log(user)
-    console.log(password)
-    database
-        .prepare(`INSERT INTO entries (user, password) VALUES (?, ?)`)
-        .run(user, password);
+function createEntry(value) {
+    database.prepare(
+        "INSERT INTO entries VALUES (?, DATETIME('now'))"
+    ).run(value)
 }
 
-function get_entries(chunk, offset = 0) {
-    out = database
-        .prepare(`SELECT id, user, password FROM entries LIMIT ? OFFSET ?`)
-        .all(chunk, offset);
+function getAllEntries() {
+    entries = database.prepare(
+        "SELECT * FROM entries"
+    ).get()
 
-    out.forEach(row => {
-        console.log(row.user)
-        console.log(row.password)
+    entries.forEach(element => {
+        console.log(element.value)
     });
 }
 
-module.exports = { create_entry, get_entries };
+module.exports = { createEntry, getAllEntries };

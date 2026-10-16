@@ -1,4 +1,5 @@
 const express = require("express");
+const entryModel = require("../models/entryModel")
 
 const router = express.Router()
 
@@ -7,6 +8,7 @@ router.get("/urlparams",(req,res) => {
 });
 
 router.get("/urlparams/:param",(req,res) => {
+    entryModel.createEntry(req.params.param)
     res.end(`Inputted parameter: ${req.params.param}`);
     res.send();
 });
