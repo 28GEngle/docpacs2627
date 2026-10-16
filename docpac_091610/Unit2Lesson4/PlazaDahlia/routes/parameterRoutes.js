@@ -1,3 +1,5 @@
+const express = require('express')
+const router = express.Router();
 router.get('/query', (req, res) => {
     const message = req.query.message?.trim();
     if (!message) {
@@ -14,3 +16,4 @@ router.get('/urlparams/:paramname', (req, res) => {
         res.status(200).send('You captured: ' + message);
     }
 });
+module.exports = router;
