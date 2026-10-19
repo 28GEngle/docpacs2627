@@ -1,19 +1,17 @@
 const database = require("./database");
 
-function createEntry(value) {
+function createEntry(value, source) {
     database.prepare(
-        "INSERT INTO entries VALUES (?, DATETIME('now'))"
-    ).run(value)
+        "INSERT INTO entries VALUES (?, ?, ?, DATETIME('now'))"
+    ).run(undefined, value, source)
 }
 
 function getAllEntries() {
-    entries = database.prepare(
+    dbEntries = database.prepare(
         "SELECT * FROM entries"
-    ).get()
+    ).all()
 
-    entries.forEach(element => {
-        console.log(element.value)
-    });
+    console.log(dbEntries)
 }
 
 module.exports = { createEntry, getAllEntries };
