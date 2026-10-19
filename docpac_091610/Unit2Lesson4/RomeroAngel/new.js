@@ -5,3 +5,5 @@ function wait() {
 }
 wait();
 console.log("Yahoo!");
+wait();
+console.log("EEEEEEEYYAAAHHAAAAA!!!!!");
