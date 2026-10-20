@@ -4,6 +4,8 @@ function createEntry(value, source) {
     database.prepare(
         "INSERT INTO entries VALUES (?, ?, ?, DATETIME('now'))"
     ).run(undefined, value, source)
+
+    console.log(`Adding entry to database: value: '${value}', source: '${source}'`)
 }
 
 function getAllEntries() {
@@ -11,7 +13,7 @@ function getAllEntries() {
         "SELECT * FROM entries"
     ).all()
 
-    console.log(dbEntries)
+    return dbEntries
 }
 
 module.exports = { createEntry, getAllEntries };

@@ -1,9 +1,11 @@
-<%- include('partials/header') -%>
-<body>
-    for (let i = 0; i < messages.length; i++) {
-        const element = messages[i];
+<% include("partials/header") %>
 
-        <p><% messageszx   %></p>
-    }
+<body>
+    <% entries.forEach(element => { %>
+        <div class="dataEntry">
+            <p>data: <%= element.value %></p>
+        </div>
+    <%}); %>
 </body>
-<%- include('partials/footer') -%>
+
+<% include("partials/footer") %>
