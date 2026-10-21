@@ -3,7 +3,10 @@
 <body>
     <% entries.forEach(element => { %>
         <div class="dataEntry">
-            <p>data: <%= element.value %></p>
+            <fieldset>
+                <p>ID: <%= element.id %></p>
+                <p>Data: <%= element.value %></p>
+            </fieldset>
         </div>
     <%}); %>
 </body>
