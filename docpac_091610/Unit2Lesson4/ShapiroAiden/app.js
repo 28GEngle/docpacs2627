@@ -1,10 +1,12 @@
-// app
-const app = express();
 
 // require
 const express = require('express');
 const dotenv = require('dotenv');
 const path = require('path');
+
+// app
+const app = express();
+
 
 // routes and util
 const requestLogger = require('./utils/requestLogger');
