@@ -11,9 +11,12 @@ router.get("/urlparams",(req,res) => {
 });
 
 router.get("/urlparams/:param",(req,res) => {
-    entryModel.createEntry(req.params.param, "Param Messager")
-    res.end(`Inputted parameter: ${req.params.param}`);
-    res.send();
+    if (req.params.param.trim() != null) {
+        entryModel.createEntry(req.params.param, "Param Messager");
+        res.end(`Inputted parameter: ${req.params.param}`);
+    } else {
+        res.end("Invalid input");
+    }
 });
 
 module.exports = router;

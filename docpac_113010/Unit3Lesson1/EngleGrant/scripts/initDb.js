@@ -9,4 +9,5 @@ database.exec(`
     );
 `)
 
+console.log("Database set up successfully.")
 database.close()
