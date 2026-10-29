@@ -17,6 +17,10 @@
 
 <body>
     <div>
+        <div id="nameInput">
+            <p>Input your name here</p>
+            <input id="playerName" name="playerName" type="text" value="No Name" maxlength="20">
+        </div>
         <div id="controllerStatus">
             <p>Controller: </p>
             <p style="display: inline;" id="controller">Not Detected</p>
@@ -44,9 +48,15 @@
             <div>
                 <p style="display: block; font-size: 35px; background-color: red; margin-top: 0px;" id="statusText">GAME
                     OVER</p>
-                <p>High score:</p>
+                <p>Session high score:</p>
                 <p id="highScoreText">N/A</p>
+                <br>
             </div>
+        </fieldset>
+        <fieldset id="saveStatus" hidden>
+            <legend>SAVED</legend>
+            <p style="display: block; font-size: 20px; background-color: lime; margin-top: 0px; margin-bottom: 0px;" id="statusText">Saved Successfully</p>
+            <a href="/highscores.html">Leaderboard</a>
         </fieldset>
     </div>
 </body>

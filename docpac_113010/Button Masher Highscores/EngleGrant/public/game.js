@@ -27,14 +27,16 @@ var directions = {
     "right": 3
 }
 
-var controllerStatusText = document.getElementById("controller");
-var scoreText = document.getElementById("score");
-var timeText = document.getElementById("time");
-var directionText = document.getElementById("directionText");
-var controllerDirectionText = document.getElementById("controllerDirectionText");
-var startButton = document.getElementById("start");
-var statusLabel = document.getElementById("statusLabel");
-var highScoreText = document.getElementById("highScoreText");
+const controllerStatusText = document.getElementById("controller");
+const scoreText = document.getElementById("score");
+const timeText = document.getElementById("time");
+const directionText = document.getElementById("directionText");
+const controllerDirectionText = document.getElementById("controllerDirectionText");
+const startButton = document.getElementById("start");
+const statusLabel = document.getElementById("statusLabel");
+const highScoreText = document.getElementById("highScoreText");
+const playerNameText = document.getElementById("nameInput");
+const saveStatus = document.getElementById("saveStatus");
 
 var controller = false
 var gameRunning = false
@@ -108,6 +110,8 @@ function pollGamepad() {
 }
 
 function endGame() {
+    submitScore(score)
+
     console.log("ending");
     clearInterval(timeInterval);
     clearInterval(directionInterval);
@@ -120,6 +124,37 @@ function endGame() {
     statusLabel.hidden = false;
 
     gameRunning = false;
+}
+
+async function submitScore(score) {
+    validatedName = validatePlayerName();
+    validatedScore = validateScore();
+
+    console.log(validatedName);
+    console.log(validatedScore);
+    
+    if (validatedName && validatedScore >= 0) {
+        fetch('/api/scores', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({validatedName, validatedScore})
+        })
+        .then(response => {
+            return response.json()
+        })
+        .then(response => {
+            console.log(response)
+            if (response == "Data invalid") {
+                alert("Input invalid.")
+            } else {
+                saveStatus.hidden = false;
+                alert("Score saved.")
+            }
+        });
+    } else {
+        saveStatus.hidden = true;
+        alert("Unable to submit score; username is invalid.")
+    }
 }
 
 function deadzone(input, min = -0.3, max = 0.3) {
@@ -207,4 +242,23 @@ function timerTick() {
         endGame()
     }
     timeText.textContent = gameTime
+}
+
+function validatePlayerName() {
+    playerName = document.getElementById("playerName").value.trim();
+    console.log(`Fetched name "${playerName}"`)
+
+    if (playerName && playerName.length <= 20 && typeof playerName == "string") {
+        return playerName;
+    } else {
+        return null;
+    }
+};
+
+function validateScore() {
+    if (typeof score == "number" && score >= 0) {
+        return score;
+    } else {
+        return null;
+    }
 }
