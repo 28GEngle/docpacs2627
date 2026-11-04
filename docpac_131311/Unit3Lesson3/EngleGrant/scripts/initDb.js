@@ -10,6 +10,14 @@ appDb.exec(`
     );
 `)
 
+appDb.exec(`
+  CREATE TABLE IF NOT EXISTS schema_migrations (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      migration_name TEXT NOT NULL,
+      applied_date DATETIME
+  );
+`)
+
 sessionsDb.exec(`
     CREATE TABLE IF NOT EXISTS sessions (
       sid INTEGER PRIMARY KEY AUTOINCREMENT,
