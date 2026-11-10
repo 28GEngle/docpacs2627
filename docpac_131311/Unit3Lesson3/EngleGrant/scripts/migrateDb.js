@@ -76,7 +76,7 @@ function determinePendingMigrations() {
 
     if (successfulMigrations) {
         successfulMigrations.forEach(migration => {
-            console.log(`${migration} was already run`)
+            console.log(`${migration} was already applied`)
         });
         pendingMigrations = migrationFiles.filter(item => !successfulMigrations.includes(item))
     } else {

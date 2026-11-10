@@ -1,4 +1,5 @@
 const appDb = require("../models/database");
+changelogMessage = "Created users table with id, user, email, password, and creation_date columns." 
 
 function up() {
     
@@ -15,15 +16,16 @@ function up() {
                 creation_date DATETIME
             );
         `)
-    } catch {
+    } catch (err) {
         fail = true
         appDb.exec(`ROLLBACK;`)
+        throw new Error(`Migration failed; ${err.code}`)
     }
     if (!fail) {
         appDb.exec(`COMMIT;`)
-        console.log("Created users table")
+        console.log(changelogMessage)
+        return true
     }
-    return true
 }
 
 function down() {
@@ -32,15 +34,16 @@ function down() {
 
     try {
         appDb.exec(`DROP TABLE IF NOT EXISTS users;`)
-    } catch {
+    } catch (err) {
         fail = true
         appDb.exec(`ROLLBACK;`)
+        throw new Error(`Migration undo failed; ${err.code}`)
     }
     if (!fail) {
         appDb.exec(`COMMIT;`)
         console.log("Migration undone. Hope you saved your data! :)")
+        return true
     }
-    return true
 }
 
 module.exports = { up };
