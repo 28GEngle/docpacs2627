@@ -1,6 +1,8 @@
 const appDb = require("../models/database");
 const sessionsDb = require("../models/sessions");
 
+//----------------------------------------------
+
 appDb.exec(`
     CREATE TABLE IF NOT EXISTS entries (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -17,6 +19,8 @@ appDb.exec(`
       applied_date DATETIME
   );
 `)
+
+//----------------------------------------------
 
 sessionsDb.exec(`
     CREATE TABLE IF NOT EXISTS sessions (
