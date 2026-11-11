@@ -7,7 +7,6 @@ const app = express();
 const path = require('path');
 const requestLogger = require('./utils/requestLogger.js');
 const init = require('./scripts/initDb.js');
-const userTableInit = require('./migrations/001_create_users_table.js')
 const sessionConfig = require('./utils/sessionConfig.js');
 const sessionMiddleware = require('./utils/sessionConfig.js');
 
