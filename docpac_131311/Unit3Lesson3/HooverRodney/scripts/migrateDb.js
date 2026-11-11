@@ -47,3 +47,4 @@ if (nonCompletedMigrations.length === 0) {
 }
 
 db.close();
+console.log("Database closed successfully!");
