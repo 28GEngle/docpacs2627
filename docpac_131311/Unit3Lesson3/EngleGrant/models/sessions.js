@@ -2,7 +2,8 @@ const sqlite = require("better-sqlite3");
 const path = require("path");
 
 const dbPath = path.join(__dirname, "..", "data", "sessions.db");
+
 const database = new sqlite(dbPath);
-console.log("Database connection created")
+console.log("Database connection created");
 
 module.exports = database;

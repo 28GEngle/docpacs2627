@@ -44,6 +44,7 @@ router.get("/query",(req,res) => {
         return;
     };
 
+    entryModel.createEntry(message,"GET Message")
     res.send(data);
 })
 
