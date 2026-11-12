@@ -2,52 +2,80 @@ const db = require('../models/database')
 const fs = require('fs');
 const path = require('path')
 
-function initMigrationsTable() {
-    console.log('migration table init starting');
 
-    db.exec(
-        `CREATE TABLE IF NOT EXISTS schema_migrations(
-        name TEXT NOT NULL PRIMARY KEY,
-        timestamp TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
-    );`
-    );
-    console.log('Migration table created!');
-};
+try {
+    function initMigrationsTable() {
+        console.log('migration table init starting');
 
-initMigrationsTable();
+        db.exec(`
+            CREATE TABLE IF NOT EXISTS schema_migrations (
+                name TEXT NOT NULL PRIMARY KEY,
+                timestamp TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+            );
+        `);
 
-const migrationFiles = fs.readdirSync('./migrations');
-migrationFiles.sort();
-console.log(`Found migration files: ${migrationFiles}`);
-
-const completedMigrations = db.prepare('SELECT name FROM schema_migrations').all();
-console.log(`Completed migrations: ${completedMigrations}`);
-
-for (const pending of migrationFiles) {
-    const migrationPath = path.join('..', 'migrations', pending)
-    console.log(`Pending jawns: ${migrationPath}`);
-    const migration = require(migrationPath);
-    
-    if (completedMigrations.some((element) => {
-        if (element.name === migration.migName) {
-            return true
-        };
-    })
-    ) { continue };
-    
-    if (migration.up(db) === false){
-        migration.down(db);
-        console.log('Uh oh! Something went wrong! Migration bugging!')
-        return
+        console.log('Migration table created!');
     }
-    
-    db.prepare(
-        `INSERT INTO schema_migrations (name)
-        VALUES (?)`
-    ).run(migration.migName)
-    console.log('Completed! Yahoo!')
-    
-};
 
-db.close()
+    initMigrationsTable();
+
+    const migrationsDir = path.join(__dirname, '..', 'migrations');
+
+    const migrationFiles = fs.readdirSync(migrationsDir)
+        .filter(file => file.endsWith('.js'));
+
+    migrationFiles.sort();
+
+    console.log(`Found migration files: ${migrationFiles}`);
+
+    const completedMigrations = new Set(
+        db.prepare('SELECT name FROM schema_migrations')
+            .all()
+            .map(element => element.name)
+    );
+
+    for (const file of migrationFiles) {
+        const migrationPath = path.join(migrationsDir, file);
+
+        console.log(`Pending jawns: ${migrationPath}`);
+
+        const migration = require(migrationPath);
+
+        if (completedMigrations.has(migration.migName)) {
+            continue;
+        }
+
+        try {
+            const transaction = db.transaction(() => {
+                const result = migration.up(db);
+
+                if (result === false) {
+                    throw new Error('Migration returned false');
+                }
+
+                db.prepare(`
+                    INSERT INTO schema_migrations (name)
+                    VALUES (?)
+                `).run(migration.migName);
+            });
+
+            transaction();
+
+            console.log(`Successfully completed ${migration.migName}!`);
+
+            completedMigrations.add(migration.migName);
+
+        } catch (error) {
+            console.error(`Migration failed: ${migration.migName}`);
+            throw error;
+        }
+    }
+
+    console.log('All migrations completed!');
+
+} catch (error) {
+    console.error('Migration process failed:', error);
+    process.exitCode = 1;
+
+}
 

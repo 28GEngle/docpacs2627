@@ -9,7 +9,9 @@
   "scripts": {
     "start": "node app.js",
     "dev": "nodemon app.js",
-    "initDb": "node scripts/initDb.js"
+    "init-db": "node scripts/initDb.js && npm run db-migrate",
+    "db-migrate": "node scripts/migrateDb.js"
+
   },
   "dependencies": {
     "better-sqlite3": "^12.11.1",
