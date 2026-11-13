@@ -1,0 +1,27 @@
+1. Browser: Access the Brooks Brothers Website.
+
+2. Does the design of this web page convey an appropriate message to users? What message do you think it conveys? What elements contribute to that message?
+
+- The design focuses on advertising clothing for many different types of people. Elements that contribute to this is the navbar showing men, women, and children categories which contain dropdowns for more specific articles about the clothes.
+
+3. Which target market is this site directed towards?
+
+- It's directed towards people who want to buy clothes on the higher end of quality.
+
+4. Does this site use branding standards effectively? How does it attempt to establish brand recognition or mind share? Do you think this site is designed to answer market demands? Why or why not?
+
+- The site initially looks complex, which may ward off some people but it gives people all the information they need to know. The site doesn't directly give the user any brand or other entity like a logo, icon, etc. except the name with a different font. I don't think the site is designed to answer specific standards other websites use, and instead have their own take in getting people what they need instead of what the search engine needs.
+
+5. Browser: Access the San Diego Zoo Safari Park site.
+
+6. Does the design of this web page convey an appropriate message to users? What message do you think it conveys? What elements contribute to that message?
+
+- The site conveys that they run a zoo, and want to teach people about the animals within as a non-profit and to save some species. They have a page stating their company mission, and a lot of articles about their animals.
+
+7. Which target market is this site directed towards?
+
+- It's directed towards people who like animals and want to help them by donating to the zoo and seeing some of the animals they have.
+
+8. Does this site use branding standards effectively? How does it attempt to establish brand recognition or mind share? Do you think this site is designed to answer market demands? Why or why not?
+
+- They have good standards, having a clear and concise page and support for mobile devices unlike the clothing page. It isn't too complex, and everything is easy to find. This is much better than the clothing page since it has a lot of things it doesn't, like mobile support, a logo, and easy to use UI.
