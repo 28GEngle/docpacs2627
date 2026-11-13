@@ -1,0 +1,3 @@
+USD   -> Pound: 1 -> 0.83
+Pound ->  Euro: 1 -> 1.19
+Euro  -> Ruble: 1 -> 91.67
