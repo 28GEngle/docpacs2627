@@ -1,7 +1,7 @@
 const database = require("./database");
 
 function createUser(username,email,password) {
-
+    
 }
 
 function usernameToUser(displayName) {

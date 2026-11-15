@@ -23,12 +23,53 @@ Do not rely only on browser-side attributes such as required.
 
 submission = req.body
 
-if (submission.username &&
-    submission.email &&
-    submission.password &&
-    submission.confirm_password
-) {
-   console.log("User Input Valid") 
+const username = String(submission.username).trim()
+const email = String(submission.email).trim()
+const password = String(submission.password).trim()
+const confirmPassword = String(submission.confirm_password).trim()
+
+const validationStatus = validate(username, email, password, confirmPassword)
+
+
+
+   function validate(username, email, password, confirmPassword) {
+
+    usernameValid = typeof username == "string" && username.length >= 2 && username.length <= 20
+    emailValid = typeof email == "string" && email.length >= 7 && email.includes("@") && email.includes(".") 
+    passwordValid = typeof password == "string" && password.length <= 64
+    passwordConfirmationValid = password === confirmPassword
+
+    if (usernameValid &&
+        emailValid &&
+        passwordValid &&
+        passwordConfirmationValid
+    ) {
+        return true
+    } else {
+        issues = {
+            usernameValid: true,
+            emailValid: true,
+            passwordValid: true,
+            passwordConfirmationValid: true
+        }
+
+        if (!usernameValid) {
+            issues.usernameValid = false
+        }
+
+        if (!emailValid) {
+            issues.emailValid = false
+        }
+
+        if (!passwordValid) {
+            issues.passwordValid = false
+        }
+
+        if (!passwordConfirmationValid) {
+            issues.passwordConfirmationValid = false
+        }
+        return issues
+    }
 }
 
 res.end("test")
