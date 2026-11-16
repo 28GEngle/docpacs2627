@@ -30,21 +30,30 @@ const confirmPassword = String(submission.confirm_password).trim()
 
 const validationStatus = validate(username, email, password, confirmPassword)
 
-
+    if (!validate(username,email,password,confirmPassword)) {
+        user = userModel.createUser(username,email,password)
+        if (user.lastInsertRowid) {
+            req.session.userID = user.lastInsertRowid
+        } else {
+            console.log("user failed to be created")
+        }
+    } else {
+        console.log("not valid")
+    }
 
    function validate(username, email, password, confirmPassword) {
 
-    usernameValid = typeof username == "string" && username.length >= 2 && username.length <= 20
-    emailValid = typeof email == "string" && email.length >= 7 && email.includes("@") && email.includes(".") 
-    passwordValid = typeof password == "string" && password.length <= 64
-    passwordConfirmationValid = password === confirmPassword
+    usernameValid = (typeof username == "string" && username.length >= 2 && username.length <= 20)
+    emailValid = (typeof email == "string" && email.length >= 7 && email.includes("@") && email.includes("."))
+    passwordValid = (typeof password == "string" && password.length <= 64)
+    passwordConfirmationValid = (password === confirmPassword)
 
     if (usernameValid &&
         emailValid &&
         passwordValid &&
         passwordConfirmationValid
     ) {
-        return true
+        return false
     } else {
         issues = {
             usernameValid: true,

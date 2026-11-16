@@ -1,7 +1,16 @@
 const database = require("./database");
 
 function createUser(username,email,password) {
-    
+    if (!usernameToUser(username) && !emailToUser(email)) {
+        user = database.prepare(
+            `INSERT INTO users (user, email, password, display_name, is_active, creation_date, updated_at)
+            VALUES (?, ?, ?, ?, true, DATETIME(),DATETIME())`
+        ).run(username, email, password, username)
+        return user
+    } else {
+        console.log("duplicate username or email")
+        return false
+    }
 }
 
 function usernameToUser(displayName) {
